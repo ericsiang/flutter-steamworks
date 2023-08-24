@@ -1,0 +1,42 @@
+// ignore_for_file: public_member_api_docs, packed_nesting_non_packed
+import "dart:ffi";
+import "../enums/eresult.dart";
+import "../typedefs.dart";
+
+@Packed(4)
+class SearchForGameResultCallback extends Struct {
+  static int get callbackId => 5202;
+
+  @UnsignedLongLong()
+  external int searchId;
+
+  @Int32()
+  external EResultAliasDart result;
+
+  @Int()
+  external int countPlayersInGame;
+
+  @Int()
+  external int countAcceptedGame;
+
+  @UnsignedLongLong()
+  external CSteamId steamIdHost;
+
+  @Bool()
+  external bool finalCallback;
+}
+
+extension SearchForGameResultCallbackExtensions
+    on Pointer<SearchForGameResultCallback> {
+  int get searchId => ref.searchId;
+
+  EResult get result => EResult.fromValue(ref.result);
+
+  int get countPlayersInGame => ref.countPlayersInGame;
+
+  int get countAcceptedGame => ref.countAcceptedGame;
+
+  CSteamId get steamIdHost => ref.steamIdHost;
+
+  bool get finalCallback => ref.finalCallback;
+}

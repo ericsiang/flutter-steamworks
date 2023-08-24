@@ -1,0 +1,42 @@
+// ignore_for_file: public_member_api_docs, packed_nesting_non_packed
+import "dart:ffi";
+import "../enums/eresult.dart";
+import "../typedefs.dart";
+
+@Packed(4)
+class RemoteStorageGetPublishedItemVoteDetailsResult extends Struct {
+  static int get callbackId => 1320;
+
+  @Int32()
+  external EResultAliasDart result;
+
+  @UnsignedLongLong()
+  external PublishedFileId publishedFileId;
+
+  @Int()
+  external int votesFor;
+
+  @Int()
+  external int votesAgainst;
+
+  @Int()
+  external int reports;
+
+  @Float()
+  external double fScore;
+}
+
+extension RemoteStorageGetPublishedItemVoteDetailsResultExtensions
+    on Pointer<RemoteStorageGetPublishedItemVoteDetailsResult> {
+  EResult get result => EResult.fromValue(ref.result);
+
+  PublishedFileId get publishedFileId => ref.publishedFileId;
+
+  int get votesFor => ref.votesFor;
+
+  int get votesAgainst => ref.votesAgainst;
+
+  int get reports => ref.reports;
+
+  double get fScore => ref.fScore;
+}
