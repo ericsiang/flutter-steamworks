@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_game/src/generated/initializers/steam_api.dart';
 import 'package:steamworks/steamworks.dart';
 import "dart:ffi";
 import "package:ffi/ffi.dart";
 
 void main() async {
+  /*
+  * 用來替代 DRM封裝的函示，用來檢查用戶是否從steam啟動遊戲(false:是從steam啟動，true:不是從steam啟動)
+  * 必須放在init之前，且會自動觸發從steam啟動遊戲，但如果從local啟動過遊戲，則不會觸發
+  */
+  bool result = SteamApi.restartAppIfNecessary(480);
+  print("restartAppIfNecessary: $result");
+
+  // 關閉SteamApi
+  //SteamApi.shutdown();
+
   SteamClient.init();
   SteamClient steamClient = SteamClient.instance;
 
